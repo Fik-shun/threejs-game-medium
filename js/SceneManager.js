@@ -12,6 +12,7 @@ function SceneManager(canvas) {
     var ambientLight = new THREE.AmbientLight('#ffffff', 1.5)
     scene.add(ambientLight)
 
+    const dynamicSubjects = [];
     createSceneSubjects(scene);
 
 
@@ -44,10 +45,19 @@ function SceneManager(canvas) {
     function createSceneSubjects(scene) {
         theBackground = new Background(scene);
         theSpaceship  = new Spaceship(scene);
+
+        dynamicSubjects.push(theBackground);
+        dynamicSubjects.push(theSpaceship);
     }
 
 
     this.update = function() {
+        if (camera.position.y < 2000) {
+            camera.position.y += 1;
+
+            for(let i=0; i<dynamicSubjects.length; i++)
+                dynamicSubjects[i].update();
+        }
 
         renderer.render(scene, camera);
     }

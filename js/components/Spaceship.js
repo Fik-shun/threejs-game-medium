@@ -38,7 +38,8 @@ function Spaceship(scene) {
 
 	
 	this.update = function() {
-		
+		if (this.model)
+			this.model.position.y += 1;	
 	}
 
 }
