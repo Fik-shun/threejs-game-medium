@@ -15,6 +15,8 @@ function SceneManager(canvas) {
     const dynamicSubjects = [];
     createSceneSubjects(scene);
 
+    var keyMap = [];
+
 
     function buildScene() {
         const scene = new THREE.Scene();
@@ -59,6 +61,8 @@ function SceneManager(canvas) {
                 dynamicSubjects[i].update();
         }
 
+        theSpaceship.handleInput(keyMap, camera);
+
         renderer.render(scene, camera);
     }
 
@@ -75,5 +79,9 @@ function SceneManager(canvas) {
         camera.top = height / 2;
         camera.bottom = -height / 2;
         camera.updateProjectionMatrix();      
+    }
+
+    this.handleInput = function(keyCode, isDown) {
+        keyMap[keyCode] = isDown;
     }
 }
