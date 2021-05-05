@@ -9,6 +9,8 @@ function SceneManager(canvas) {
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
 
+    var theSpaceship, theBackground, theCoins, theEnemies;
+
     var ambientLight = new THREE.AmbientLight('#ffffff', 1.5)
     scene.add(ambientLight)
 
@@ -47,6 +49,8 @@ function SceneManager(canvas) {
     function createSceneSubjects(scene) {
         theBackground = new Background(scene);
         theSpaceship  = new Spaceship(scene);
+        theCoins = placeCoins(scene);
+        theEnemies = placeEnemies(scene);
 
         dynamicSubjects.push(theBackground);
         dynamicSubjects.push(theSpaceship);
