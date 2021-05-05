@@ -9,8 +9,7 @@ function Enemy(scene, x, y) {
 	modelLoader.load
 		( 
 			"../../assets/models/enemy/enemy.gltf", 
-			(function(obj)
-			{
+			( function(obj) {
 				this.model = obj.scene;
 
 				this.model.rotation.x = Math.PI / 2;
