@@ -15,7 +15,7 @@ function SceneManager(canvas) {
     scene.add(ambientLight);
 
     const dynamicSubjects = [];
-    createSceneSubjects(scene);
+    createSceneSubjects();
     var theMissiles = [];
 
     var keyMap = [];
@@ -47,7 +47,7 @@ function SceneManager(canvas) {
         return camera;
     }
 
-    function createSceneSubjects(scene) {
+    function createSceneSubjects() {
         theBackground = new Background(scene);
         theSpaceship  = new Spaceship(scene);
         theCoins = placeCoins(scene);
@@ -66,6 +66,9 @@ function SceneManager(canvas) {
                 dynamicSubjects[i].update();
         }
 
+        checkCollisions();
+
+
         // Handling Inputs
         // ========================================
         theSpaceship.handleInput(keyMap, camera);
@@ -83,6 +86,59 @@ function SceneManager(canvas) {
 
         renderer.render(scene, camera);
     }
+
+    function checkCollisions() {
+
+        var i = theCoins.length;
+        while (i--) {
+            if (isCollision(theSpaceship, theCoins[i])) {
+                scene.remove(theCoins[i].model);
+                theCoins.splice(i, 1);
+            } 
+        }
+
+        var i = theEnemies.length;
+        while (i--) {
+            if (isCollision(theSpaceship, theEnemies[i])) {
+                scene.remove(theEnemies[i].model);
+                theEnemies.splice(i, 1);
+            }
+
+            var j = theMissiles.length;
+            while (j--) {
+                if (isCollision(theMissiles[j], theEnemies[i])) {
+                    scene.remove(theEnemies[i].model);
+                    theEnemies.splice(i, 1);
+                    scene.remove(theMissiles[j].model);
+                    theMissiles.splice(j, 1);
+                } 
+            }
+        }
+    }
+
+    function isCollision(m1, m2) {
+
+        if (m1.model && m2.model) {
+            minX1 = m1.model.position.x - (m1.width/2);
+            maxX1 = m1.model.position.x + (m1.width/2);
+            minY1 = m1.model.position.y - (m1.height/2);
+            maxY1 = m1.model.position.y + (m1.height/2);
+
+            minX2 = m2.model.position.x - (m2.width/2);
+            maxX2 = m2.model.position.x + (m2.width/2);
+            minY2 = m2.model.position.y - (m2.height/2);
+            maxY2 = m2.model.position.y + (m2.height/2);
+
+            if (minX1 <= maxX2 && maxX1 >= minX2 && minY1 <= maxY2 && maxY1 >= minY2)
+                return true;
+            else
+                return false;
+        }
+        else
+            return false;
+
+    } 
+
 
     this.onWindowResize = function() {
         const { width, height } = canvas;

@@ -24,5 +24,9 @@ function Enemy(scene, x, y) {
 				this.width = enemyBndBox.getSize().x;
 			}).bind(this)
 		)
+
+	this.destroy = function() {
+		scene.remove(this.model);
+	}
 }
 
