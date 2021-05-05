@@ -20,6 +20,11 @@ function SceneManager(canvas) {
 
     var keyMap = [];
 
+    var score = 0;
+    var health = 3;
+    var gameEnded = false;
+
+
 
     function buildScene() {
         const scene = new THREE.Scene();
@@ -59,32 +64,40 @@ function SceneManager(canvas) {
 
 
     this.update = function() {
-        if (camera.position.y < 2000) {
+        if (camera.position.y < 2000 && health > 0) {
             camera.position.y += 1;
 
             for(let i=0; i<dynamicSubjects.length; i++)
-                dynamicSubjects[i].update();
+                dynamicSubjects[i].update();            
+
+            checkCollisions();
+
+            // Handling Inputs
+            // ========================================
+            theSpaceship.handleInput(keyMap, camera);
+            if (keyMap[32]) {
+
+                var x = theSpaceship.model.position.x;
+                var y = theSpaceship.model.position.y + theSpaceship.height/2;
+
+                const m = new Missile(scene, x, y);
+
+                dynamicSubjects.push(m);
+                theMissiles.push(m);
+                keyMap[32] = false;
+            }
+
+            renderer.render(scene, camera);
+        
+        }
+        else if (!gameEnded) {
+            gameEnded = true;
+            if (health > 0)
+                document.getElementById("gameover").innerHTML = "GAME OVER"; 
+            else
+                document.getElementById("gameover").innerHTML = "YOU LOST"; 
         }
 
-        checkCollisions();
-
-
-        // Handling Inputs
-        // ========================================
-        theSpaceship.handleInput(keyMap, camera);
-        if (keyMap[32]) {
-
-            var x = theSpaceship.model.position.x;
-            var y = theSpaceship.model.position.y + theSpaceship.height/2;
-
-            const m = new Missile(scene, x, y);
-
-            dynamicSubjects.push(m);
-            theMissiles.push(m);
-            keyMap[32] = false;
-        }
-
-        renderer.render(scene, camera);
     }
 
     function checkCollisions() {
@@ -92,25 +105,31 @@ function SceneManager(canvas) {
         var i = theCoins.length;
         while (i--) {
             if (isCollision(theSpaceship, theCoins[i])) {
+                score += 1;
                 scene.remove(theCoins[i].model);
                 theCoins.splice(i, 1);
+                document.getElementById("scoreboard").innerHTML = "HEALTH: " + health + " &emsp; SCORE: " + score; 
             } 
         }
 
         var i = theEnemies.length;
         while (i--) {
             if (isCollision(theSpaceship, theEnemies[i])) {
+                health -= 1;
                 scene.remove(theEnemies[i].model);
                 theEnemies.splice(i, 1);
+                document.getElementById("scoreboard").innerHTML = "HEALTH: " + health + " &emsp; SCORE: " + score; 
             }
 
             var j = theMissiles.length;
             while (j--) {
                 if (isCollision(theMissiles[j], theEnemies[i])) {
+                    score += 2;
                     scene.remove(theEnemies[i].model);
                     theEnemies.splice(i, 1);
                     scene.remove(theMissiles[j].model);
                     theMissiles.splice(j, 1);
+                    document.getElementById("scoreboard").innerHTML = "HEALTH: " + health + " &emsp; SCORE: " + score; 
                 } 
             }
         }
