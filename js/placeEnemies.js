@@ -27,7 +27,7 @@ function placeEnemies(scene) {
 		    arr[j] = temp;
 		}
 
-		return arr.slice(0, noEnemies)
+		return arr.slice(0, noEnemies);
     }
 
 

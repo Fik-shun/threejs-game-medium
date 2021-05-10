@@ -1,1 +1,17 @@
 # THREEJS GAME: Space Shooter
+
+A Browser based replica of the famous _**"Space Shooter"**_ game made in Three.js
+
+Play the game here:
+- [2D Version](https://fik-shun.github.io/Space-Shooter-ThreeJS/)  
+- [3D Version](https://fik-shun.github.io/Fik-shoot/)  
+
+Checkout the Teaser/Trailer for the game [here](https://www.youtube.com/watch?v=NTtcsSwfWnA).  
+
+**Testing:**  
+
+In order to test the application, run `python3 -m http.server` and head over to [localhost:8000](http://localhost:8000) in the  browser.
+
+**Output:**
+
+![Final image](https://cdn-images-1.medium.com/max/2560/1*IrxsckKSOFhyYCnRW40wUw.png)
