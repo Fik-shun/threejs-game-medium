@@ -1,7 +1,7 @@
 
 function Missile(scene, x, y) {
 	
-	var modelLoader = new THREE.GLTFLoader()
+	var modelLoader = new THREE.GLTFLoader();
 	this.model;
 	this.height;
 	this.width;

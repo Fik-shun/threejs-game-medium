@@ -1,11 +1,11 @@
 
 function Spaceship(scene) {
 	
-	var modelLoader = new THREE.OBJLoader()
+	var modelLoader = new THREE.OBJLoader();
 
-	const textureLoader = new THREE.TextureLoader()
-	var texMap = textureLoader.load("../../assets/textures/spaceship.png")
-	var modelMaterial = new THREE.MeshBasicMaterial({ map: texMap})
+	const textureLoader = new THREE.TextureLoader();
+	var texMap = textureLoader.load("../../assets/textures/spaceship.png");
+	var modelMaterial = new THREE.MeshBasicMaterial({ map: texMap});
 
 
 	this.model;

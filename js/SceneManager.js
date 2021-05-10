@@ -58,7 +58,6 @@ function SceneManager(canvas) {
         theCoins = placeCoins(scene);
         theEnemies = placeEnemies(scene);
 
-        dynamicSubjects.push(theBackground);
         dynamicSubjects.push(theSpaceship);
     }
 
