@@ -53,7 +53,6 @@ function SceneManager(canvas) {
         theCoins = placeCoins(scene);
         theEnemies = placeEnemies(scene);
 
-        dynamicSubjects.push(theBackground);
         dynamicSubjects.push(theSpaceship);
     }
 
@@ -64,27 +63,27 @@ function SceneManager(canvas) {
 
             for(let i=0; i<dynamicSubjects.length; i++)
                 dynamicSubjects[i].update();
+
+            checkCollisions();
+
+
+            // Handling Inputs
+            // ========================================
+            theSpaceship.handleInput(keyMap, camera);
+            if (keyMap[32]) {
+
+                var x = theSpaceship.model.position.x;
+                var y = theSpaceship.model.position.y + theSpaceship.height/2;
+
+                const m = new Missile(scene, x, y);
+
+                dynamicSubjects.push(m);
+                theMissiles.push(m);
+                keyMap[32] = false;
+            }
+
+            renderer.render(scene, camera);
         }
-
-        checkCollisions();
-
-
-        // Handling Inputs
-        // ========================================
-        theSpaceship.handleInput(keyMap, camera);
-        if (keyMap[32]) {
-
-            var x = theSpaceship.model.position.x;
-            var y = theSpaceship.model.position.y + theSpaceship.height/2;
-
-            const m = new Missile(scene, x, y);
-
-            dynamicSubjects.push(m);
-            theMissiles.push(m);
-            keyMap[32] = false;
-        }
-
-        renderer.render(scene, camera);
     }
 
     function checkCollisions() {

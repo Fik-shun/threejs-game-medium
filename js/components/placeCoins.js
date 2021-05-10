@@ -27,7 +27,7 @@ function placeCoins(scene) {
 		    arr[j] = temp;
 		}
 
-		return arr.slice(0, noCoins)
+		return arr.slice(0, noCoins);
     }
 
 }
