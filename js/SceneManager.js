@@ -3,16 +3,17 @@ function SceneManager(canvas) {
     const screenDimensions = {
         width: canvas.width,
         height: canvas.height
-    }
+    };
     
     const scene = buildScene();
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
 
-    var ambientLight = new THREE.AmbientLight('#ffffff', 1.5)
-    scene.add(ambientLight)
+    var ambientLight = new THREE.AmbientLight('#ffffff', 1.5);
+    scene.add(ambientLight);
 
-    createSceneSubjects(scene);
+    var dynamicSubjects = [];
+    createSceneSubjects();
 
 
     function buildScene() {
@@ -24,7 +25,7 @@ function SceneManager(canvas) {
     function buildRender({ width, height }) {
         const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); 
 
-        renderer.setClearColor("#222222") 
+        renderer.setClearColor("#222222");
         renderer.setSize(width, height);
 
         return renderer;
@@ -41,9 +42,11 @@ function SceneManager(canvas) {
         return camera;
     }
 
-    function createSceneSubjects(scene) {
+    function createSceneSubjects() {
         theBackground = new Background(scene);
         theSpaceship  = new Spaceship(scene);
+
+        dynamicSubjects.push(theSpaceship);
     }
 
 
