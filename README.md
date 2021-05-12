@@ -1,6 +1,8 @@
 # THREEJS GAME: Space Shooter
 
-A Browser based replica of the famous _**"Space Shooter"**_ game made in Three.js
+A Browser based replica of the famous _**"Space Shooter"**_ game made in Three.js  
+
+Checkout the complete tutorial on how to build games using Three.js [here](https://javascript.plainenglish.io/three-js-tutorial-to-build-your-first-browser-game-ae34bb0d351d).
 
 Play the game here:
 - [2D Version](https://fik-shun.github.io/Space-Shooter-ThreeJS/)  
