@@ -10,10 +10,23 @@ Play the game here:
 
 Checkout the Teaser/Trailer for the game [here](https://www.youtube.com/watch?v=NTtcsSwfWnA).  
 
-**Testing:**  
+
+### Key Bindings
+
+|   Key    |       Description        |
+|----------|--------------------------|
+|    W     |    Plane: move forward   |
+|    S     |    Plane: move backward  |
+|    D     |     Plane: move right    |
+|    A     |     Plane: move left     |
+|  Space   |       Shoot Missile      |
+
+
+### Testing
 
 In order to test the application, run `python3 -m http.server` and head over to [localhost:8000](http://localhost:8000) in the  browser.
 
-**Output:**
+
+### Output
 
 ![Final image](https://cdn-images-1.medium.com/max/2560/1*IrxsckKSOFhyYCnRW40wUw.png)
